@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Global from '../Global';
 
 export default class ServiceApiSuppliers extends Component {
-    url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers";
+    url = Global.urlNorthwind;
     idSupplier = React.createRef();
     state = {
         suppliers: [],
-        NombreSupplier: "",
-        NombreEmpresa: "",
-        ciudad: "",
-        pais: "",
-        telefono: ""
+        elsupplier: null
     }
 
     cargarSuppliers = () => {
-        axios.get(this.url).then(response => {
+        var request = "Suppliers"
+        axios.get(this.url + request).then(response => {
             this.setState({
                 suppliers: response.data.value
             })
@@ -23,29 +21,15 @@ export default class ServiceApiSuppliers extends Component {
 
     mostratDatosSupplier = (event) => {
         event.preventDefault();
+        var request = "Suppliers";
         var id = parseInt(this.idSupplier.current.value);
-        var validar = false;
-        axios.get(this.url).then(response => {
+        axios.get(this.url + request).then(response => {
             for (var supplier of response.data.value) {
                 if (supplier.SupplierID == id) {
                     this.setState({
-                        NombreSupplier: supplier.ContactName,
-                        NombreEmpresa: "Empresa: " + supplier.CompanyName,
-                        ciudad: "Ciudad: " + supplier.City,
-                        pais: "Pais: " + supplier.Country,
-                        telefono: "Telefono: " + supplier.Phone
+                        elsupplier: supplier
                     })
-                    validar = true;
                 }
-            }
-            if (validar == false) {
-                this.setState({
-                    NombreSupplier: "ID no encontrado",
-                    NombreEmpresa: "",
-                    ciudad: "",
-                    pais: "",
-                    telefono: ""
-                })
             }
         })
     }
@@ -58,16 +42,22 @@ export default class ServiceApiSuppliers extends Component {
         return (
             <div>
                 <h1>Service Api Suppliers</h1>
-                <input type="text" ref={this.idSupplier} />
-                <button onClick={this.mostratDatosSupplier}>Mostrar datos supplier</button>
+                <form onSubmit={this.mostratDatosSupplier}>
+                    <label>Buscar ID: </label>
+                    <input type="text" ref={this.idSupplier} />
+                <button>Mostrar datos supplier</button>
+                </form>
                 <hr />
-                <div>
-                    <h2>{this.state.NombreSupplier}</h2>
-                    <p>{this.state.NombreEmpresa}</p>
-                    <p>{this.state.ciudad}</p>
-                    <p>{this.state.pais}</p>
-                    <p>{this.state.telefono}</p>
-                </div>
+                    {
+                        this.state.elsupplier != null &&
+                        <div>
+                            <h2>{this.state.elsupplier.ContactName}</h2>
+                            <p>{this.state.elsupplier.CompanyName}</p>
+                            <p>{this.state.elsupplier.City}</p>
+                            <p>{this.state.elsupplier.Country}</p>
+                            <p>{this.state.elsupplier.Phone}</p>
+                        </div>
+                    }
                 <hr />
                 <ul>
                     {
