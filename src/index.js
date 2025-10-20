@@ -7,11 +7,19 @@ import ServicioApiCustomers from './components/ServicioApiCustomers';
 import ServiceApiSuppliers from './components/ServiceApiSuppliers';
 import EmpleadosDepartamento from './components/EmpleadosDepartamento';
 import EmpleadosOficios from './components/EmpleadosOficios';
+import Departamentos from './components/maestrodetalle/Departamentos';
+import Cursos from './components/ejemplocomunicacion/Cursos';
+import TablaMultiplicar from './components/TablaMultiplicar';
+import Router from './components/Router';
+import MenuRutas from './components/MenuRutas';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //Borrar cuando tengamos servicios API en React el <React.StrictMode>
 root.render(
-  <EmpleadosOficios />
+  <div>
+    <MenuRutas/>
+    <Router/>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
