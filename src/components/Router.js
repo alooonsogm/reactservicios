@@ -6,6 +6,7 @@ import NotFound from './NotFound'
 import { useParams } from 'react-router-dom'
 import Collatz from './Collatz'
 import MenuRutas from './MenuRutas'
+import HospitalesMultiples from './HospitalesMultiples'
 
 export default class Router extends Component {
   render() {
@@ -30,7 +31,8 @@ export default class Router extends Component {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/tabla/:minumero" element={<TablaMultiplicarElement/>}/>
-        <Route path="collatz/:minumero" element={<CollatzElement/>}/>
+        <Route path="/collatz/:minumero" element={<CollatzElement/>}/>
+        <Route path="/hospitales" element={<HospitalesMultiples/>}/>
         {/*Para incluir las rutas que no exiten con una pagina 404 debemos poner en el path
         un "*" y ademas debe ser la ultima de todas las rutas. */}
         <Route path="*" element={<NotFound/>}/>
