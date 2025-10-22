@@ -22,7 +22,6 @@ export default class ServicioApiCustomers extends Component {
         console.log("Despues de servicio.");
     }
 
-    // Se ejecuta ANTES de dibujar el component
     componentDidMount = () => {
         console.log("creando component");
         this.loadCustomrs();

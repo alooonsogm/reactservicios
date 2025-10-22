@@ -40,8 +40,7 @@ export default class Alumnos extends Component {
             {
                 this.state.alumnos.map((alumno, index) => {
                     return(<li key={index}>
-                        {alumno.nombre} {alumno.apellidos}<button onClick={ (event) => {
-                            event.preventDefault();
+                        {alumno.nombre} {alumno.apellidos}<button onClick={ () => {
                             this.props.detallesalumno(alumno)
                         } }>Detalles</button>
                     </li>)
